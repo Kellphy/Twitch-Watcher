@@ -289,12 +289,13 @@ async function getAllStreamer(page) {
   console.log('🔐 Checking login...');
   await checkLogin(page);
   console.log('📡 Checking active streamers...');
-  await scroll(page, scrollTimes);
+  // await scroll(page, scrollTimes);
   const jquery = await queryOnWebsite(page, channelsQuery);
   streamers = null;
   streamers = new Array();
 
   console.log('🧹 Filtering out html codes...');
+  console.log('🧹 Found '+jquery.length+' streams.');
   for (var i = 0; i < jquery.length; i++) {
     streamers[i] = jquery[i].attribs.href.split("/")[1];
   }
