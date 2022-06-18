@@ -1,21 +1,24 @@
 version: '3.5'
 services:
-  valorant-watcher:
-    #build: . #For local build
-    #image: valorant-watcher:latest #For local build
-    image: frosty5689/twitch-watcher:latest
+  twitch-watcher:
+    build: . #For local build
+    image: twitch-watcher #For local build
+    image: frosty5689/twitch-watcher:latest #For Docker Hub image
     restart: always
     environment:
       - token=rxk38rh5qtyw95fkvm7kgfceh4mh6u #Example value from readme
-      #- streamersUrl=https://www.twitch.tv/directory/game/Rust?sort=VIEWER_COUNT&tl=c2542d6d-cd10-4532-919b-3d19f30a768b
-      #- watchAlwaysTopStreamer=true
-      #- channelsWithPriority=illojuan,alexby11,aroyitt
+      - streamersUrl=https://www.twitch.tv/directory/game/Warframe
+      - streamersUrl=https://www.twitch.tv/directory/game/Rocket%20League?tl=c2542d6d-cd10-4532-919b-3d19f30a768b
+      - streamersUrl=https://www.twitch.tv/directory/game/Warframe?tl=c2542d6d-cd10-4532-919b-3d19f30a768b
+      - streamersUrl=https://www.twitch.tv/kellphy/videos
+      - watchAlwaysTopStreamer=true
+      #- channelsWithPriority=kellphy
       #- userAgent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
       #- scrollDelay=2000
       #- scrollTimes=5
-      #- minWatching=6
-      #- maxWatching=15
-      #- streamerListRefres=2
+      - minWatching=5
+      - maxWatching=10
+      #- streamerListRefresh=2
       #- streamerListRefreshUnit=hour
       #- browserScreenshot=false
       #- proxy=ip:port
