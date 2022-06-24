@@ -22,18 +22,18 @@ const streamersUrl = (process.env.streamersUrl || 'https://www.twitch.tv/directo
 const scrollDelay = (Number(process.env.scrollDelay) || 2000);
 const scrollTimes = (Number(process.env.scrollTimes) || 5);
 
-const minWatching = (Number(process.env.minWatching) || 15); // Minutes
-const maxWatching = (Number(process.env.maxWatching) || 30); //Minutes
+const minWatching = (Number(process.env.minWatching) || 5); // Minutes
+const maxWatching = (Number(process.env.maxWatching) || 10); //Minutes
 
 const noChannelFoundWait = (Number(process.env.noChannelFoundWait) || 5); // Minutes
 
 const checkForDrops = (process.env.checkForDrops || true);
 
-const streamerListRefresh = (Number(process.env.streamerListRefresh) || 1);
-const streamerListRefreshUnit = (process.env.streamerListRefreshUnit || 'hour'); //https://day.js.org/docs/en/manipulate/add
+// const streamerListRefresh = (Number(process.env.streamerListRefresh) || 1);
+// const streamerListRefreshUnit = (process.env.streamerListRefreshUnit || 'minute'); //https://day.js.org/docs/en/manipulate/add
 
 const channelsWithPriority = process.env.channelsWithPriority ? process.env.channelsWithPriority.split(",") : [];
-const watchAlwaysTopStreamer = (process.env.watchAlwaysTopStreamer || false);
+const watchAlwaysTopStreamer = (process.env.watchAlwaysTopStreamer || true);
 
 const showBrowser = false; // false state equ headless mode;
 const proxy = (process.env.proxy || ""); // "ip:port" By https://github.com/Jan710
@@ -41,8 +41,8 @@ const proxyAuth = (process.env.proxyAuth || "");
 
 const browserScreenshot = (process.env.browserScreenshot || false);
 
-const browserClean = 1;
-const browserCleanUnit = 'hour';
+const browserClean = (Number(process.env.browserClean) || 1);
+const browserCleanUnit = (process.env.browserCleanUnit || 'hour'); //https://day.js.org/docs/en/manipulate/add
 
 var browserConfig = {
   headless: !showBrowser,
@@ -71,7 +71,7 @@ const campaignInProgressDropClaimQuery = '[data-test-selector="DropsCampaignInPr
 
 
 async function viewRandomPage(browser, page) {
-  var streamer_last_refresh = dayjs().add(streamerListRefresh, streamerListRefreshUnit);
+  // var streamer_last_refresh = dayjs().add(streamerListRefresh, streamerListRefreshUnit);
   var browser_last_refresh = dayjs().add(browserClean, browserCleanUnit);
   while (run) {
     try {
@@ -84,11 +84,11 @@ async function viewRandomPage(browser, page) {
         browser_last_refresh = dayjs().add(browserClean, browserCleanUnit);
       }
 
-      if (dayjs(streamer_last_refresh).isBefore(dayjs())) {
+      // if (dayjs(streamer_last_refresh).isBefore(dayjs())) {
         console.log(`🔧 Refreshing streamers ...`)
         await getAllStreamer(page); //Call getAllStreamer function and refresh the list
-        streamer_last_refresh = dayjs().add(streamerListRefresh, streamerListRefreshUnit); //https://github.com/D3vl0per/Valorant-watcher/issues/25
-      }
+        // streamer_last_refresh = dayjs().add(streamerListRefresh, streamerListRefreshUnit); //https://github.com/D3vl0per/Valorant-watcher/issues/25
+      // }
 
       let watch;
 
@@ -408,7 +408,7 @@ async function main() {
     browser,
     page
   } = await spawnBrowser();
-  await getAllStreamer(page);
+  // await getAllStreamer(page);
   console.log("=========================");
   console.log('🔭 Running watcher...');
   await viewRandomPage(browser, page);
