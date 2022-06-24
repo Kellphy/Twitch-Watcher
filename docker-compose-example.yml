@@ -3,7 +3,7 @@ services:
   twitch-watcher:
     build: . #For local build
     image: twitch-watcher #For local build
-    image: frosty5689/twitch-watcher:latest #For Docker Hub image
+    #image: frosty5689/twitch-watcher:latest #For Docker Hub image
     restart: always
     environment:
       - token=rxk38rh5qtyw95fkvm7kgfceh4mh6u #Example value from readme
