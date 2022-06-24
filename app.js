@@ -76,6 +76,7 @@ async function viewRandomPage(browser, page) {
   while (run) {
     try {
       if (dayjs(browser_last_refresh).isBefore(dayjs())) {
+        console.log(`🔧 Refreshing browser ...`)
         var newSpawn = await cleanup(browser, page);
         browser = newSpawn.browser;
         page = newSpawn.page;
@@ -84,6 +85,7 @@ async function viewRandomPage(browser, page) {
       }
 
       if (dayjs(streamer_last_refresh).isBefore(dayjs())) {
+        console.log(`🔧 Refreshing streamers ...`)
         await getAllStreamer(page); //Call getAllStreamer function and refresh the list
         streamer_last_refresh = dayjs().add(streamerListRefresh, streamerListRefreshUnit); //https://github.com/D3vl0per/Valorant-watcher/issues/25
       }
