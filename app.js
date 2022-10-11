@@ -128,29 +128,29 @@ async function viewRandomPage(browser, page) {
         await clickWhenExist(page, matureContentQuery); //Click on accept button
 
         if (firstRun) {
-          console.log('🔧 Setting lowest possible resolution..');
+          // console.log('🔧 Setting lowest possible resolution..');
           // await clickWhenExist(page, streamPauseQuery);
           
-          console.log('🔧 Waiting for Stream Settings Query..');
-          await page.waitFor(streamSettingsQuery);
-          console.log('🔧 Done.');
-          await clickWhenExist(page, streamSettingsQuery);
+          // console.log('🔧 Waiting for Stream Settings Query..');
+          // await page.waitFor(streamSettingsQuery);
+          // console.log('🔧 Done.');
+          // await clickWhenExist(page, streamSettingsQuery);
 
-          console.log('🔧 Waiting for Stream Quality Settings Query..');
-          await page.waitFor(streamQualitySettingQuery);
-          console.log('🔧 Done.');
-          await clickWhenExist(page, streamQualitySettingQuery);
+          // console.log('🔧 Waiting for Stream Quality Settings Query..');
+          // await page.waitFor(streamQualitySettingQuery);
+          // console.log('🔧 Done.');
+          // await clickWhenExist(page, streamQualitySettingQuery);
 
-          console.log('🔧 Waiting for Stream Quality Query..');
-          await page.waitFor(streamQualityQuery);
-          console.log('🔧 Done.');
-          var resolution = await queryOnWebsite(page, streamQualityQuery);
-          resolution = resolution[resolution.length - 1].attribs.id;
-          await page.evaluate((resolution) => {
-            document.getElementById(resolution).click();
-          }, resolution);
+          // console.log('🔧 Waiting for Stream Quality Query..');
+          // await page.waitFor(streamQualityQuery);
+          // console.log('🔧 Done.');
+          // var resolution = await queryOnWebsite(page, streamQualityQuery);
+          // resolution = resolution[resolution.length - 1].attribs.id;
+          // await page.evaluate((resolution) => {
+          //   document.getElementById(resolution).click();
+          // }, resolution);
 
-          await clickWhenExist(page, streamPauseQuery);
+          // await clickWhenExist(page, streamPauseQuery);
 
           await page.keyboard.press('m'); //For unmute
           firstRun = false;
@@ -369,19 +369,6 @@ async function clickWhenExist(page, query) {
   }
   try {
       if (result[0].type == 'tag' && result[0].name == 'button') {
-        await page.click(query);
-        await page.waitFor(500);
-      }
-  } catch (e) { 
-    console.log(`Failed to click on query: ${query}, ${e.message}`)
-  }
-
-  if (typeof result[1] === 'undefined') {
-    console.log(`Query not found 2: ${query}`);
-    return;
-  }
-  try {
-      if (result[1].type == 'tag' && result[1].name == 'button') {
         await page.click(query);
         await page.waitFor(500);
       }
