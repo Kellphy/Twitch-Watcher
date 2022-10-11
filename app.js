@@ -359,7 +359,7 @@ async function clickWhenExist(page, query) {
   let result = await queryOnWebsite(page, query);
 
   try {
-    result.forEach(element => {
+    result.forEach(async element => {
       if (element.type == 'tag' && element.name == 'button') {
         await page.click(query);
         await page.waitFor(500);
