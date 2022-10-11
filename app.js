@@ -363,9 +363,9 @@ async function clickWhenExist(page, query) {
       if (element.type == 'tag' && element.name == 'button') {
         await page.click(query);
         await page.waitFor(500);
-        return;
       }
     });
+    return;
   } catch (e) { }
 }
 
