@@ -121,8 +121,9 @@ async function viewRandomPage(browser, page) {
         console.log('\n🔗 Now watching streamer: ', baseUrl + watch);
 
         await page.goto(baseUrl + watch, {
-          "waitUntil": "domcontentloaded"
+          "waitUntil": "networkidle2"
         }); //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
+        await page.waitForNavigation();
         console.log('✅ Stream loaded!');
         await clickWhenExist(page, cookiePolicyQuery);
         await clickWhenExist(page, matureContentQuery); //Click on accept button
