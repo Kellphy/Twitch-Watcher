@@ -357,7 +357,7 @@ function getRandomInt(min, max) {
 
 async function clickWhenExist(page, query) {
   let result = await queryOnWebsite(page, query);
-  if (typeof result === 'undefined') {
+  if (typeof result[0] === 'undefined') {
     console.log(`Query not found: ${query}`);
     return;
   }
