@@ -85,7 +85,6 @@ async function viewRandomPage(browser, page) {
       }
 
       // if (dayjs(streamer_last_refresh).isBefore(dayjs())) {
-        console.log(`🔧 Refreshing streamers ...`)
         await getAllStreamer(page); //Call getAllStreamer function and refresh the list
         // streamer_last_refresh = dayjs().add(streamerListRefresh, streamerListRefreshUnit); //https://github.com/D3vl0per/Valorant-watcher/issues/25
       // }
@@ -126,20 +125,26 @@ async function viewRandomPage(browser, page) {
 
         if (firstRun) {
           console.log('🔧 Setting lowest possible resolution..');
+          
+          console.log('🔧 Pause Query');
           await clickWhenExist(page, streamPauseQuery);
 
+          console.log('🔧 Setting Query');
           await clickWhenExist(page, streamSettingsQuery);
           await page.waitFor(streamQualitySettingQuery);
 
+          console.log('🔧 Quality Setting Query');
           await clickWhenExist(page, streamQualitySettingQuery);
           await page.waitFor(streamQualityQuery);
 
+          console.log('🔧 Quality Query');
           var resolution = await queryOnWebsite(page, streamQualityQuery);
           resolution = resolution[resolution.length - 1].attribs.id;
           await page.evaluate((resolution) => {
             document.getElementById(resolution).click();
           }, resolution);
 
+          console.log('🔧 Pause Query');
           await clickWhenExist(page, streamPauseQuery);
 
           await page.keyboard.press('m'); //For unmute
