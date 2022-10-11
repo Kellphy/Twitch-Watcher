@@ -125,26 +125,20 @@ async function viewRandomPage(browser, page) {
 
         if (firstRun) {
           console.log('🔧 Setting lowest possible resolution..');
-          
-          console.log('🔧 Pause Query');
           await clickWhenExist(page, streamPauseQuery);
 
-          console.log('🔧 Setting Query');
           await clickWhenExist(page, streamSettingsQuery);
           await page.waitFor(streamQualitySettingQuery);
 
-          console.log('🔧 Quality Setting Query');
           await clickWhenExist(page, streamQualitySettingQuery);
           await page.waitFor(streamQualityQuery);
 
-          console.log('🔧 Quality Query');
           var resolution = await queryOnWebsite(page, streamQualityQuery);
           resolution = resolution[resolution.length - 1].attribs.id;
           await page.evaluate((resolution) => {
             document.getElementById(resolution).click();
           }, resolution);
 
-          console.log('🔧 Pause Query');
           await clickWhenExist(page, streamPauseQuery);
 
           await page.keyboard.press('m'); //For unmute
@@ -359,13 +353,11 @@ async function clickWhenExist(page, query) {
   let result = await queryOnWebsite(page, query);
 
   try {
-    result.forEach(async element => {
-      if (element.type == 'tag' && element.name == 'button') {
-        await page.click(query);
-        await page.waitFor(500);
-      }
-    });
-    return;
+    if (result[0].type == 'tag' && result[0].name == 'button') {
+      await page.click(query);
+      await page.waitFor(500);
+      return;
+    }
   } catch (e) { }
 }
 
