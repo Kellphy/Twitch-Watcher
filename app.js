@@ -129,7 +129,7 @@ async function viewRandomPage(browser, page) {
 
         if (firstRun) {
           console.log('🔧 Setting lowest possible resolution..');
-          await clickWhenExist(page, streamPauseQuery);
+          // await clickWhenExist(page, streamPauseQuery);
           
           console.log('🔧 Waiting for Stream Settings Query..');
           await page.waitFor(streamSettingsQuery);
@@ -368,10 +368,12 @@ async function clickWhenExist(page, query) {
     return;
   }
   try {
-    if (result[0].type == 'tag' && result[0].name == 'button') {
-      await page.click(query);
-      await page.waitFor(500);
-    }
+    result.forEach(async element => {
+      if (element.type == 'tag' && element.name == 'button') {
+        await page.click(query);
+        await page.waitFor(500);
+      }
+    });
   } catch (e) { 
     console.log(`Failed to click on query: ${query}, ${e.message}`)
   }
