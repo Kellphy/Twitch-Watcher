@@ -356,12 +356,14 @@ function getRandomInt(min, max) {
 
 async function clickWhenExist(page, query) {
   let result = await queryOnWebsite(page, query);
-  console.log(result);
+  if (typeof result === 'undefined') {
+    console.log(`Query not found: ${query}`);
+    return;
+  }
   try {
     if (result[0].type == 'tag' && result[0].name == 'button') {
       await page.click(query);
       await page.waitFor(500);
-      return;
     }
   } catch (e) { 
     console.log(`Failed to click on query: ${query}, ${e.message}`)
