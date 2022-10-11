@@ -129,7 +129,7 @@ async function viewRandomPage(browser, page) {
 
         if (firstRun) {
 
-          if(true){ //skipping for now
+          if(false){ //skipping for now
             console.log('🔧 Setting lowest possible resolution..');
             await clickWhenExist(page, streamPauseQuery);
             
@@ -367,22 +367,34 @@ function getRandomInt(min, max) {
 async function clickWhenExist(page, query) {
   let result = await queryOnWebsite(page, query);
 
-  var x = result.toArray();
-  x.forEach(async element => {
-    if (typeof element === 'undefined') {
-      console.log(`Query not found: ${query}`);
-    }
-    try {
-        if (element.type == 'tag' && element.name == 'button') {
-          await page.click(query);
-          await page.waitFor(500);
-        }
-    } catch (e) { 
-      console.log(`Failed to click on query: ${query}, ${e.message}`)
-    }
-  });
-  
-  return;
+  ////For checking all occurances
+  // var x = result.toArray();
+  // x.forEach(async element => {
+  //   if (typeof element === 'undefined') {
+  //     console.log(`Query not found: ${query}`);
+  //   }
+  //   try {
+  //       if (element.type == 'tag' && element.name == 'button') {
+  //         await page.click(query);
+  //         await page.waitFor(500);
+  //       }
+  //   } catch (e) { 
+  //     console.log(`Failed to click on query: ${query}, ${e.message}`)
+  //   }
+  // });
+
+  if (typeof result[0] === 'undefined') {
+    console.log(`Query not found: ${query}`);
+    return;
+  }
+  try {
+      if (result[0].type == 'tag' && result[0].name == 'button') {
+        await page.click(query);
+        await page.waitFor(500);
+      }
+  } catch (e) { 
+    console.log(`Failed to click on query: ${query}, ${e.message}`)
+  }
 }
 
 
