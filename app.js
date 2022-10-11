@@ -356,7 +356,7 @@ function getRandomInt(min, max) {
 
 async function clickWhenExist(page, query) {
   let result = await queryOnWebsite(page, query);
-
+  console.log(result);
   try {
     if (result[0].type == 'tag' && result[0].name == 'button') {
       await page.click(query);
