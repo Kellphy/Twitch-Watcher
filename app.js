@@ -359,11 +359,13 @@ async function clickWhenExist(page, query) {
   let result = await queryOnWebsite(page, query);
 
   try {
-    if (result[0].type == 'tag' && result[0].name == 'button') {
-      await page.click(query);
-      await page.waitFor(500);
-      return;
-    }
+    result.forEach(element => {
+      if (element.type == 'tag' && element.name == 'button') {
+        await page.click(query);
+        await page.waitFor(500);
+        return;
+      }
+    });
   } catch (e) { }
 }
 
