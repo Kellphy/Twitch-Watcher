@@ -106,6 +106,10 @@ async function viewRandomPage(browser, page) {
         }
       }
 
+      if (checkForDrops) {
+        await claimDropsIfAny(page);
+      }
+
       if (!watch) {
         console.log(`❌ No channels available, retrying in ${noChannelFoundWait} minutes...`)
         await page.waitFor(noChannelFoundWait * 60 * 1000);
@@ -163,10 +167,6 @@ async function viewRandomPage(browser, page) {
         console.log(`💤 Watching stream for ${sleep / 60000} minutes\n`);
 
         await page.waitFor(sleep);
-        if (checkForDrops) {
-          await claimDropsIfAny(page);
-        }
-
       }
     } catch (e) {
       console.log('🤬 Error: ', e);
@@ -188,9 +188,14 @@ async function claimDropsIfAny(page) {
     for (var i = 0; i < claimDrops.length; i++) {
       await clickWhenExist(page, campaignInProgressDropClaimQuery); // Claim drop X times based on how many drops are available
     }
-    console.log(`✅ ${claimDrops.length} drop(s) claimed!`);
+    var dropsStillLeft = await queryOnWebsite(page, campaignInProgressDropClaimQuery);
+    if (dropsStillLeft.length > 0) {
+      console.log(`Something went wrong, ${dropsStillLeft.length} drop(s) unclaimed.`);
+    }
+    else {
+      console.log(`✅ ${claimDrops.length} drop(s) claimed!`);
+    }
   }
-  //
 }
 
 async function readLoginData() {
@@ -358,7 +363,9 @@ async function clickWhenExist(page, query) {
       await page.waitFor(500);
       return;
     }
-  } catch (e) { }
+  } catch (e) { 
+    console.log(`Failed to click on query: ${query}, ${e.message}`)
+  }
 }
 
 
