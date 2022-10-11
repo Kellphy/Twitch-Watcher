@@ -131,12 +131,13 @@ async function viewRandomPage(browser, page) {
           console.log('🔧 Setting lowest possible resolution..');
           await clickWhenExist(page, streamPauseQuery);
 
+          await page.waitFor(streamSettingsQuery);
           await clickWhenExist(page, streamSettingsQuery);
+
           await page.waitFor(streamQualitySettingQuery);
-
           await clickWhenExist(page, streamQualitySettingQuery);
-          await page.waitFor(streamQualityQuery);
 
+          await page.waitFor(streamQualityQuery);
           var resolution = await queryOnWebsite(page, streamQualityQuery);
           resolution = resolution[resolution.length - 1].attribs.id;
           await page.evaluate((resolution) => {
