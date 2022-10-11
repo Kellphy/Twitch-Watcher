@@ -368,12 +368,23 @@ async function clickWhenExist(page, query) {
     return;
   }
   try {
-    result.forEach(async element => {
-      if (element.type == 'tag' && element.name == 'button') {
+      if (result[0].type == 'tag' && result[0].name == 'button') {
         await page.click(query);
         await page.waitFor(500);
       }
-    });
+  } catch (e) { 
+    console.log(`Failed to click on query: ${query}, ${e.message}`)
+  }
+
+  if (typeof result[1] === 'undefined') {
+    console.log(`Query not found 2: ${query}`);
+    return;
+  }
+  try {
+      if (result[1].type == 'tag' && result[1].name == 'button') {
+        await page.click(query);
+        await page.waitFor(500);
+      }
   } catch (e) { 
     console.log(`Failed to click on query: ${query}, ${e.message}`)
   }
