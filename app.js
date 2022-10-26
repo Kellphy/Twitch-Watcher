@@ -143,7 +143,7 @@ async function viewRandomPage(browser, page) {
             // await clickWhenExist(page, streamPauseQuery);
 
             console.log('🔧 Waiting for Stream Settings Query..');
-            await page.waitFor(streamSettingsQuery);
+            await page.waitForSelector(streamSettingsQuery);
             console.log('🔧 Done.');
             await clickWhenExist(page, streamSettingsQuery);
   
