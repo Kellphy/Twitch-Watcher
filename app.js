@@ -127,15 +127,20 @@ async function viewRandomPage(browser, page) {
         await clickWhenExist(page, cookiePolicyQuery);
         await clickWhenExist(page, matureContentQuery); //Click on accept button
 
-        if (firstRun) {
+        //Check if the stream video player is loaded
+        console.log('🔧 Waiting for Stream Settings Query..');
+        await page.waitFor(streamSettingsQuery);
+        console.log('🔧 Done.');
 
+        if (firstRun) {
+          
+          if(false){ //skipping for now
             console.log('🔧 Setting lowest possible resolution..');
             await clickWhenExist(page, streamPauseQuery);
-            
+
             console.log('🔧 Waiting for Stream Settings Query..');
             await page.waitFor(streamSettingsQuery);
             console.log('🔧 Done.');
-            if(false){ //skipping for now
             await clickWhenExist(page, streamSettingsQuery);
   
             console.log('🔧 Waiting for Stream Quality Settings Query..');
