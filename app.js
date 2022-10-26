@@ -129,9 +129,7 @@ async function viewRandomPage(browser, page) {
 
         //Check if the stream video player is loaded
         await Promise.all([
-          console.log("Wait for navigation"),
           page.waitForNavigation(),
-          console.log("Reloading ..."),
           page.reload({"waitUntil": "networkidle0"}),
         ]);
         console.log('🔧 Waiting for Stream Settings Query..');
@@ -141,8 +139,8 @@ async function viewRandomPage(browser, page) {
         if (firstRun) {
 
           if(true){ //skipping for now
-            console.log('🔧 Setting lowest possible resolution..');
-            await clickWhenExist(page, streamPauseQuery);
+            // console.log('🔧 Setting lowest possible resolution..');
+            // await clickWhenExist(page, streamPauseQuery);
 
             console.log('🔧 Waiting for Stream Settings Query..');
             await page.waitFor(streamSettingsQuery);
@@ -163,7 +161,7 @@ async function viewRandomPage(browser, page) {
               document.getElementById(resolution).click();
             }, resolution);
   
-            await clickWhenExist(page, streamPauseQuery);
+            // await clickWhenExist(page, streamPauseQuery);
           }
 
           await page.keyboard.press('m'); //For unmute
@@ -199,9 +197,12 @@ async function viewRandomPage(browser, page) {
 async function claimDropsIfAny(page) {
   console.log('🔎 Checking for drops...');
 
-  await page.goto(inventoryUrl, {
-    "waitUntil": "networkidle0"
-  }); //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
+  await Promise.all([
+    page.waitForNavigation(),
+    page.waitForNavigation(),page.goto(inventoryUrl, {
+      "waitUntil": "networkidle0"
+    }) //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
+  ]);
 
   var claimDrops = await queryOnWebsite(page, campaignInProgressDropClaimQuery);
   if (claimDrops.length > 0) {
