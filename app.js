@@ -129,13 +129,13 @@ async function viewRandomPage(browser, page) {
 
         if (firstRun) {
 
-          if(false){ //skipping for now
             console.log('🔧 Setting lowest possible resolution..');
             await clickWhenExist(page, streamPauseQuery);
             
             console.log('🔧 Waiting for Stream Settings Query..');
             await page.waitFor(streamSettingsQuery);
             console.log('🔧 Done.');
+            if(false){ //skipping for now
             await clickWhenExist(page, streamSettingsQuery);
   
             console.log('🔧 Waiting for Stream Quality Settings Query..');
@@ -236,6 +236,7 @@ async function readLoginData() {
       return cookie;
     } else if (process.env.token) {
       console.log('✅ Env config found');
+      console.log(process.env.streamersUrl);
 
       if (proxy) browserConfig.args.push('--proxy-server=' + proxy);
       cookie[0].value = process.env.token; //Set cookie from env
