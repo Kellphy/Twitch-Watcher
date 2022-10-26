@@ -125,6 +125,9 @@ async function viewRandomPage(browser, page) {
         }); //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
         console.log('✅ Stream loaded!');
         await clickWhenExist(page, cookiePolicyQuery);
+        
+        console.log('🔧 Waiting for Mature..');
+        await page.waitFor(matureContentQuery);
         await clickWhenExist(page, matureContentQuery); //Click on accept button
 
         //Check if the stream video player is loaded
