@@ -388,6 +388,7 @@ async function clickWhenExist(page, query) {
   //     console.log(`Failed to click on query: ${query}, ${e.message}`)
   //   }
   // });
+  console.log(`Found ${result.length} queries.`);
 
   if (typeof result[0] === 'undefined') {
     console.log(`Query not found: ${query}`);
