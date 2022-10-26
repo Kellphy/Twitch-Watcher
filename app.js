@@ -128,6 +128,8 @@ async function viewRandomPage(browser, page) {
         await clickWhenExist(page, matureContentQuery); //Click on accept button
 
         //Check if the stream video player is loaded
+        console.log("Wait for navigation");
+        await page.waitForNavigation();
         console.log('🔧 Waiting for Stream Settings Query..');
         await page.waitForSelector(streamSettingsQuery);
         console.log('🔧 Done.');
@@ -398,7 +400,7 @@ async function clickWhenExist(page, query) {
       if (result[0].type == 'tag' && result[0].name == 'button') {
         console.log("Clicked the query.");
         await page.click(query);
-        await page.waitFor(500);
+        await page.waitForTimeout(500);
       }
   } catch (e) { 
     console.log(`Failed to click on query: ${query}, ${e.message}`)
