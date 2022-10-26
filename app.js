@@ -416,6 +416,7 @@ async function clickWhenExist(page, query) {
 
 async function queryOnWebsite(page, query) {
   let bodyHTML = await page.evaluate(() => document.body.innerHTML);
+  console.log(bodyHTML);
   let $ = cheerio.load(bodyHTML);
   const jquery = $(query);
   return jquery;
