@@ -140,7 +140,7 @@ async function viewRandomPage(browser, page) {
 
         if (firstRun) {
 
-          if(false){ //skipping for now
+          if(true){ //skipping for now
             console.log('🔧 Setting lowest possible resolution..');
             await clickWhenExist(page, streamPauseQuery);
 
@@ -187,7 +187,7 @@ async function viewRandomPage(browser, page) {
         console.log(`🕒 Time: ${dayjs().format('HH:mm:ss')}`);
         console.log(`💤 Watching stream for ${sleep / 60000} minutes\n`);
 
-        await page.waitFor(sleep);
+        await page.waitForTimeout(sleep);
       }
     } catch (e) {
       console.log('🤬 Error: ', e);
