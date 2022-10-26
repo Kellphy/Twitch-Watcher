@@ -128,10 +128,12 @@ async function viewRandomPage(browser, page) {
         await clickWhenExist(page, matureContentQuery); //Click on accept button
 
         //Check if the stream video player is loaded
-        console.log("Wait for navigation");
-        await page.waitForNavigation();
-        console.log("Reloading ...");
-        await page.reload({"waitUntil": "networkidle0"});
+        await Promise.all([
+          console.log("Wait for navigation"),
+          await page.waitForNavigation(),
+          console.log("Reloading ..."),
+          await page.reload({"waitUntil": "networkidle0"}),
+        ]);
         console.log('🔧 Waiting for Stream Settings Query..');
         await page.waitForSelector(streamSettingsQuery);
         console.log('🔧 Done.');
