@@ -125,6 +125,7 @@ async function viewRandomPage(browser, page) {
         }); //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
         console.log('✅ Stream loaded!');
         await clickWhenExist(page, cookiePolicyQuery);
+        console.log('🔧 Checking mature content ...');
         await clickWhenExist(page, matureContentQuery); //Click on accept button
 
         //Check if the stream video player is loaded
@@ -133,7 +134,7 @@ async function viewRandomPage(browser, page) {
         console.log('🔧 Done.');
 
         if (firstRun) {
-          
+
           if(false){ //skipping for now
             console.log('🔧 Setting lowest possible resolution..');
             await clickWhenExist(page, streamPauseQuery);
