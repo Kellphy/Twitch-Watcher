@@ -6,18 +6,18 @@
   "scripts": {
     "start": "node app"
   },
-  "author": "frosty5689",
+  "author": "Kellphy",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/frosty5689/Twitch-watcher"
+    "url": "https://github.com/Kellphy/Twitch-watcher"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "dayjs": "^1.8.24",
     "dotenv": "^8.2.0",
     "inquirer": "^7.1.0",
-    "puppeteer-core": "^2.1.1",
+    "puppeteer-core": "^19.2.0",
     "tree-kill": "^1.2.2"
   }
 }
