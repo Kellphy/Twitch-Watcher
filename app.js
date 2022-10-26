@@ -388,7 +388,7 @@ async function clickWhenExist(page, query) {
   //     console.log(`Failed to click on query: ${query}, ${e.message}`)
   //   }
   // });
-  console.log(`Found ${result.length} queries.`);
+  console.log(`Found ${result.length} queries for ${query}`);
 
   if (typeof result[0] === 'undefined') {
     console.log(`Query not found: ${query}`);
@@ -396,6 +396,7 @@ async function clickWhenExist(page, query) {
   }
   try {
       if (result[0].type == 'tag' && result[0].name == 'button') {
+        console.log("Clicked the query.");
         await page.click(query);
         await page.waitFor(500);
       }
