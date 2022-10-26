@@ -142,9 +142,9 @@ async function viewRandomPage(browser, page) {
             // console.log('🔧 Setting lowest possible resolution..');
             // await clickWhenExist(page, streamPauseQuery);
 
-            console.log('🔧 Waiting for Stream Settings Query..');
-            await page.waitForSelector(streamSettingsQuery);
-            console.log('🔧 Done.');
+            // console.log('🔧 Waiting for Stream Settings Query..');
+            // await page.waitForSelector(streamSettingsQuery);
+            // console.log('🔧 Done.');
             await clickWhenExist(page, streamSettingsQuery);
   
             console.log('🔧 Waiting for Stream Quality Settings Query..');
