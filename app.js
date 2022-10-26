@@ -61,8 +61,8 @@ const cookiePolicyQuery = 'button[data-a-target="consent-banner-accept"]';
 const matureContentQuery = 'button[data-a-target="player-overlay-mature-accept"]';
 const channelsQuery = 'a[data-a-target="preview-card-image-link"]';
 const streamPauseQuery = 'button[data-a-target="player-play-pause-button"]';
-const streamSettingsQuery = '[data-a-target="player-settings-button"]';
-const streamQualitySettingQuery = '[data-a-target="player-settings-menu-item-quality"]';
+const streamSettingsQuery = 'button[data-a-target="player-settings-button"]';
+const streamQualitySettingQuery = 'button[data-a-target="player-settings-menu-item-quality"]';
 const streamQualityQuery = 'input[data-a-target="tw-radio"]';
 const campaignInProgressDropClaimQuery = '[data-test-selector="DropsCampaignInProgressRewardPresentation-claim-button"]';
 
