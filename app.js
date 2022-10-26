@@ -59,7 +59,7 @@ var browserConfig = {
 
 const cookiePolicyQuery = 'button[data-a-target="consent-banner-accept"]';
 const matureContentQuery = 'button[data-a-target="player-overlay-mature-accept"]';
-const channelsQuery = 'a[data-a-target="preview-card-image-link"]';
+const channelsQuery = 'a[data-a-target="preview-card-channel-link"]';
 const streamPauseQuery = 'button[data-a-target="player-play-pause-button"]';
 const streamSettingsQuery = 'button[data-a-target="player-settings-button"]';
 const streamQualitySettingQuery = 'button[data-a-target="player-settings-menu-item-quality"]';
