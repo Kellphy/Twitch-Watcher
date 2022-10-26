@@ -121,7 +121,7 @@ async function viewRandomPage(browser, page) {
         console.log('\n🔗 Now watching streamer: ', baseUrl + watch);
 
         await page.goto(baseUrl + watch, {
-          "waitUntil": "networkidle0"
+          waitUntil: ["networkidle0", "domcontentloaded"]
         }); //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
         console.log('✅ Stream loaded!');
         await clickWhenExist(page, cookiePolicyQuery);
@@ -130,7 +130,7 @@ async function viewRandomPage(browser, page) {
         //Check if the stream video player is loaded
         await Promise.all([
           page.waitForNavigation(),
-          page.reload({"waitUntil": "networkidle0"}),
+          page.reload({waitUntil: ["networkidle0", "domcontentloaded"]}),
         ]);
         console.log('🔧 Waiting for Stream Settings Query..');
         await page.waitForSelector(streamSettingsQuery);
@@ -200,7 +200,7 @@ async function claimDropsIfAny(page) {
   await Promise.all([
     page.waitForNavigation(),
     page.waitForNavigation(),page.goto(inventoryUrl, {
-      "waitUntil": "networkidle0"
+      waitUntil: ["networkidle0", "domcontentloaded"]
     }) //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
   ]);
 
@@ -313,7 +313,7 @@ async function spawnBrowser() {
 async function getAllStreamer(page) {
   console.log("=========================");
   await page.goto(streamersUrl, {
-    "waitUntil": "networkidle0"
+    waitUntil: ["networkidle0", "domcontentloaded"]
   });
   console.log('🔐 Checking login...');
   await checkLogin(page);
@@ -416,7 +416,6 @@ async function clickWhenExist(page, query) {
 
 async function queryOnWebsite(page, query) {
   let bodyHTML = await page.evaluate(() => document.body.innerHTML);
-  console.log(bodyHTML);
   let $ = cheerio.load(bodyHTML);
   const jquery = $(query);
   return jquery;
