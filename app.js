@@ -136,21 +136,26 @@ async function viewRandomPage(browser, page) {
         await page.waitForSelector(streamSettingsQuery);
         console.log('🔧 Done.');
 
+        takeScreenShot();
+
         if (firstRun) {
 
-          if(false){ //skipping for now
+          if(true){ //skipping for now
             console.log('🔧 Setting lowest possible resolution..');
             await clickWhenExist(page, streamPauseQuery);
+            takeScreenShot();
 
             console.log('🔧 Waiting for Stream Settings Query..');
             await page.waitForSelector(streamSettingsQuery);
             console.log('🔧 Done.');
             await clickWhenExist(page, streamSettingsQuery);
+            takeScreenShot();
   
             console.log('🔧 Waiting for Stream Quality Settings Query..');
             await page.waitFor(streamQualitySettingQuery);
             console.log('🔧 Done.');
             await clickWhenExist(page, streamQualitySettingQuery);
+            takeScreenShot();
   
             console.log('🔧 Waiting for Stream Quality Query..');
             await page.waitFor(streamQualityQuery);
@@ -162,25 +167,14 @@ async function viewRandomPage(browser, page) {
             }, resolution);
   
             await clickWhenExist(page, streamPauseQuery);
+            takeScreenShot();
           }
 
           await page.keyboard.press('m'); //For unmute
           firstRun = false;
         }
 
-
-        if (browserScreenshot) {
-          await page.waitFor(1000);
-          fs.access(screenshotFolder, error => {
-            if (error) {
-              fs.promises.mkdir(screenshotFolder);
-            }
-          });
-          await page.screenshot({
-            path: `${screenshotFolder}${watch}.png`
-          });
-          console.log(`📸 Screenshot created: ${watch}.png`);
-        }
+        takeScreenShot();
 
         console.log(`🕒 Time: ${dayjs().format('HH:mm:ss')}`);
         console.log(`💤 Watching stream for ${sleep / 60000} minutes\n`);
@@ -191,6 +185,22 @@ async function viewRandomPage(browser, page) {
       console.log('🤬 Error: ', e);
       console.log('Please visit the discord channel to receive help: https://discord.gg/s8AH4aZ');
     }
+  }
+}
+
+async function takeScreenShot() {
+  var ticks = new Date().getDate();
+  if (browserScreenshot) {
+    await page.waitFor(1000);
+    fs.access(screenshotFolder, error => {
+      if (error) {
+        fs.promises.mkdir(screenshotFolder);
+      }
+    });
+    await page.screenshot({
+      path: `${screenshotFolder}${ticks}-${watch}.png`
+    });
+    console.log(`📸 Screenshot created: ${ticks}-${watch}.png`);
   }
 }
 
