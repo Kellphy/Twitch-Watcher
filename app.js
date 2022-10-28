@@ -52,7 +52,7 @@ var browserConfig = {
     // '--no-first-run',
     // '--no-zygote',
     // '--disable-gpu',
-    // '--no-sandbox',
+     '--no-sandbox',
     // '--disable-setuid-sandbox'
   ]
 }; //https://github.com/D3vl0per/Valorant-watcher/issues/24
