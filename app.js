@@ -355,6 +355,12 @@ async function checkLogin(page) {
       console.log('✅ Set cookie!');
     }
   }
+  for (var i = 0; i < cookieSetByServer.length; i++) {
+    if (cookieSetByServer[i].name == 'unique_id_durable'
+    || cookieSetByServer[i].name == 'unique_id') {
+      console.log(cookieSetByServer[i].value);
+    }
+  }
 
   for (var i = 0; i < cookieSetByServer.length; i++) {
     if (cookieSetByServer[i].name == 'twilight-user') {
