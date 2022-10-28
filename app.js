@@ -136,26 +136,26 @@ async function viewRandomPage(browser, page) {
         await page.waitForSelector(streamSettingsQuery);
         console.log('🔧 Done.');
 
-        takeScreenShot();
+        await takeScreenShot();
 
         if (firstRun) {
 
           if(true){ //skipping for now
             console.log('🔧 Setting lowest possible resolution..');
             await clickWhenExist(page, streamPauseQuery);
-            takeScreenShot();
+            await takeScreenShot();
 
             console.log('🔧 Waiting for Stream Settings Query..');
             await page.waitForSelector(streamSettingsQuery);
             console.log('🔧 Done.');
             await clickWhenExist(page, streamSettingsQuery);
-            takeScreenShot();
+            await takeScreenShot();
   
             console.log('🔧 Waiting for Stream Quality Settings Query..');
             await page.waitFor(streamQualitySettingQuery);
             console.log('🔧 Done.');
             await clickWhenExist(page, streamQualitySettingQuery);
-            takeScreenShot();
+            await takeScreenShot();
   
             console.log('🔧 Waiting for Stream Quality Query..');
             await page.waitFor(streamQualityQuery);
@@ -167,14 +167,14 @@ async function viewRandomPage(browser, page) {
             }, resolution);
   
             await clickWhenExist(page, streamPauseQuery);
-            takeScreenShot();
+            await takeScreenShot();
           }
 
           await page.keyboard.press('m'); //For unmute
           firstRun = false;
         }
 
-        takeScreenShot();
+        await takeScreenShot();
 
         console.log(`🕒 Time: ${dayjs().format('HH:mm:ss')}`);
         console.log(`💤 Watching stream for ${sleep / 60000} minutes\n`);
