@@ -57,7 +57,7 @@ var browserConfig = {
   ]
 }; //https://github.com/D3vl0per/Valorant-watcher/issues/24
 
-const cookiePolicyQuery = 'button[data-a-target="consent-banner-accept"]';
+const cookiePolicyQuery = '[data-a-target="consent-banner-accept"]';
 const matureContentQuery = '[data-a-target="player-overlay-mature-accept"]';
 const channelsQuery = 'a[data-a-target="preview-card-channel-link"]';
 const streamPauseQuery = 'button[data-a-target="player-play-pause-button"]';
