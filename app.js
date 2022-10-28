@@ -57,7 +57,7 @@ var browserConfig = {
   ]
 }; //https://github.com/D3vl0per/Valorant-watcher/issues/24
 
-const cookiePolicyQuery = 'button.ScCoreButton-sc-1qn4ixc-0';
+const cookiePolicyQuery = 'button[data-a-target="consent-banner-accept"]';
 const matureContentQuery = 'button[data-a-target="player-overlay-mature-accept"]';
 const channelsQuery = 'a[data-a-target="preview-card-channel-link"]';
 const streamPauseQuery = 'button[data-a-target="player-play-pause-button"]';
@@ -188,7 +188,7 @@ async function viewRandomPage(browser, page) {
 }
 
 async function takeScreenShot(page,watch) {
-  var ticks = new Date().getTime() * 10000;
+  var ticks = new Date().getTime();
   if (browserScreenshot) {
     await page.waitForTimeout(1000);
     fs.access(screenshotFolder, error => {
@@ -294,6 +294,7 @@ async function spawnBrowser() {
   console.log('📱 Launching browser...');
   var browser = await puppeteer.launch(browserConfig);
   var page = await browser.newPage();
+  await page.setViewport({ width: 1366, height: 768});
 
   console.log('🔧 Setting User-Agent...');
   await page.setUserAgent(userAgent); //Set userAgent
