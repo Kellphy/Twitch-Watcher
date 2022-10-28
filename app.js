@@ -138,6 +138,13 @@ async function viewRandomPage(browser, page) {
 
         await takeScreenShot(page,watch);
 
+        // await page.evaluate(() => {
+        //   localStorage.setItem('mature', 'true')
+        //   localStorage.setItem('video-muted', '{"default":false}')
+        //   localStorage.setItem('volume', '0.5')
+        //   localStorage.setItem('video-quality', '{"default":"160p30"}')
+        // });
+
         if (firstRun) {
 
           if(true){ //skipping for now
@@ -241,6 +248,14 @@ async function readLoginData() {
     "session": false,
     "storeId": "0",
     "id": 1
+  },
+  {
+  "name": "unique_id",
+  "value": "MP0G0llRT8fejiy1E2LzRaxgQ0zz68An"
+  },
+  {
+  "name": "unique_id_durable",
+  "value": "MP0G0llRT8fejiy1E2LzRaxgQ0zz68An"
   }];
   try {
     console.log('🔎 Checking config file...');
@@ -294,7 +309,7 @@ async function spawnBrowser() {
   console.log('📱 Launching browser...');
   var browser = await puppeteer.launch(browserConfig);
   var page = await browser.newPage();
-  await page.setViewport({ width: 1366, height: 768});
+  // await page.setViewport({ width: 1366, height: 768});
 
   console.log('🔧 Setting User-Agent...');
   await page.setUserAgent(userAgent); //Set userAgent
@@ -347,14 +362,6 @@ async function checkLogin(page) {
   let cookieSetByServer = await page.cookies();
 
   //Set accepted cookie
-  for (var i = 0; i < cookieSetByServer.length; i++) {
-    if (cookieSetByServer[i].name == 'unique_id_durable'
-    || cookieSetByServer[i].name == 'unique_id') {
-      cookieSetByServer[i].value = 'MP0G0llRT8fejiy1E2LzRaxgQ0zz68An';
-      
-      console.log('✅ Set cookie!');
-    }
-  }
   for (var i = 0; i < cookieSetByServer.length; i++) {
     if (cookieSetByServer[i].name == 'unique_id_durable'
     || cookieSetByServer[i].name == 'unique_id') {
