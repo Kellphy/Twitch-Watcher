@@ -136,26 +136,26 @@ async function viewRandomPage(browser, page) {
         await page.waitForSelector(streamSettingsQuery);
         console.log('🔧 Done.');
 
-        await takeScreenShot(page);
+        await takeScreenShot(page,watch);
 
         if (firstRun) {
 
           if(true){ //skipping for now
             console.log('🔧 Setting lowest possible resolution..');
             await clickWhenExist(page, streamPauseQuery);
-            await takeScreenShot(page);
+            await takeScreenShot(page,watch);
 
             console.log('🔧 Waiting for Stream Settings Query..');
             await page.waitForSelector(streamSettingsQuery);
             console.log('🔧 Done.');
             await clickWhenExist(page, streamSettingsQuery);
-            await takeScreenShot(page);
+            await takeScreenShot(page,watch);
   
             console.log('🔧 Waiting for Stream Quality Settings Query..');
             await page.waitFor(streamQualitySettingQuery);
             console.log('🔧 Done.');
             await clickWhenExist(page, streamQualitySettingQuery);
-            await takeScreenShot(page);
+            await takeScreenShot(page,watch);
   
             console.log('🔧 Waiting for Stream Quality Query..');
             await page.waitFor(streamQualityQuery);
@@ -167,14 +167,14 @@ async function viewRandomPage(browser, page) {
             }, resolution);
   
             await clickWhenExist(page, streamPauseQuery);
-            await takeScreenShot(page);
+            await takeScreenShot(page,watch);
           }
 
           await page.keyboard.press('m'); //For unmute
           firstRun = false;
         }
 
-        await takeScreenShot(page);
+        await takeScreenShot(page,watch);
 
         console.log(`🕒 Time: ${dayjs().format('HH:mm:ss')}`);
         console.log(`💤 Watching stream for ${sleep / 60000} minutes\n`);
@@ -183,12 +183,11 @@ async function viewRandomPage(browser, page) {
       }
     } catch (e) {
       console.log('🤬 Error: ', e);
-      console.log('Please visit the discord channel to receive help: https://discord.gg/s8AH4aZ');
     }
   }
 }
 
-async function takeScreenShot(page) {
+async function takeScreenShot(page,watch) {
   var ticks = new Date().getDate();
   if (browserScreenshot) {
     await page.waitFor(1000);
