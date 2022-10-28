@@ -47,13 +47,13 @@ const browserCleanUnit = (process.env.browserCleanUnit || 'hour'); //https://day
 var browserConfig = {
   headless: !showBrowser,
   args: [
-    '--disable-dev-shm-usage',
-    '--disable-accelerated-2d-canvas',
-    '--no-first-run',
-    '--no-zygote',
-    '--disable-gpu',
-    '--no-sandbox',
-    '--disable-setuid-sandbox'
+    // '--disable-dev-shm-usage',
+    // '--disable-accelerated-2d-canvas',
+    // '--no-first-run',
+    // '--no-zygote',
+    // '--disable-gpu',
+    // '--no-sandbox',
+    // '--disable-setuid-sandbox'
   ]
 }; //https://github.com/D3vl0per/Valorant-watcher/issues/24
 
