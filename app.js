@@ -132,9 +132,18 @@ async function viewRandomPage(browser, page) {
           page.waitForNavigation(),
           page.reload({waitUntil: ["networkidle0", "domcontentloaded"]}),
         ]);
+
         console.log('🔧 Waiting for Stream Settings Query..');
         await page.waitForSelector(streamSettingsQuery);
         console.log('🔧 Done.');
+
+        //Force remove the banner
+        let div_selector_to_remove= 'div[class="Layout-sc-nxg1ff-0 beayth consent-banner"]';
+        await page.evaluate((sel) => {
+            var elements = document.querySelectorAll(sel);
+            for(var i=0; i< elements.length; i++){
+                elements[i].parentNode.removeChild(elements[i]);
+            }}, div_selector_to_remove);
 
         await takeScreenShot(page,watch);
 
