@@ -147,7 +147,7 @@ async function viewRandomPage(browser, page) {
 
         if (firstRun) {
 
-          if(true){ //skipping for now
+          if(false){ //skipping for now
             console.log('🔧 Setting lowest possible resolution..');
             await clickWhenExist(page, streamPauseQuery);
             await takeScreenShot(page,watch);
