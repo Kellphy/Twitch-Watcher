@@ -251,11 +251,29 @@ async function readLoginData() {
   },
   {
   "name": "unique_id",
-  "value": "MP0G0llRT8fejiy1E2LzRaxgQ0zz68An"
+  "value": "MP0G0llRT8fejiy1E2LzRaxgQ0zz68An",
+  "domain": ".twitch.tv",
+  "hostOnly": false,
+  "httpOnly": false,
+  "path": "/",
+  "sameSite": "no_restriction",
+  "secure": true,
+  "session": false,
+  "storeId": "0",
+  "id": 1
   },
   {
   "name": "unique_id_durable",
-  "value": "MP0G0llRT8fejiy1E2LzRaxgQ0zz68An"
+  "value": "MP0G0llRT8fejiy1E2LzRaxgQ0zz68An",
+  "domain": ".twitch.tv",
+  "hostOnly": false,
+  "httpOnly": true,
+  "path": "/",
+  "sameSite": "no_restriction",
+  "secure": true,
+  "session": false,
+  "storeId": "0",
+  "id": 1
   }];
   try {
     console.log('🔎 Checking config file...');
