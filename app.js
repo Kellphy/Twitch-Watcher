@@ -127,10 +127,6 @@ async function viewRandomPage(browser, page) {
         ]);
         console.log('✅ Stream loading!');
 
-        console.log('🔧 Waiting for Stream Settings Query..');
-        await page.waitForSelector(streamSettingsQuery);
-        console.log('🔧 Done.');
-
         await clickWhenExist(page, cookiePolicyQuery);
         //Force remove the banner
         let div_selector_to_remove= 'div[class="Layout-sc-nxg1ff-0 beayth consent-banner"]';
