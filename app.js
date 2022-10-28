@@ -45,15 +45,15 @@ const browserClean = (Number(process.env.browserClean) || 1);
 const browserCleanUnit = (process.env.browserCleanUnit || 'hour'); //https://day.js.org/docs/en/manipulate/add
 
 var browserConfig = {
-  headless: !showBrowser,
+  headless: showBrowser,
   args: [
-    // '--disable-dev-shm-usage',
-    // '--disable-accelerated-2d-canvas',
-    // '--no-first-run',
-    // '--no-zygote',
-    // '--disable-gpu',
+    '--disable-dev-shm-usage',
+    '--disable-accelerated-2d-canvas',
+    '--no-first-run',
+    '--no-zygote',
+    '--disable-gpu',
      '--no-sandbox',
-    // '--disable-setuid-sandbox'
+    '--disable-setuid-sandbox'
   ]
 }; //https://github.com/D3vl0per/Valorant-watcher/issues/24
 
