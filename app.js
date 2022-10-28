@@ -203,8 +203,8 @@ async function viewRandomPage(browser, page) {
 }
 
 async function takeScreenShot(page,watch) {
-  var ticks = new Date().getTime();
   if (browserScreenshot) {
+    var ticks = new Date().getTime();
     await page.waitForTimeout(1000);
     fs.access(screenshotFolder, error => {
       if (error) {
