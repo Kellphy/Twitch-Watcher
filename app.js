@@ -120,23 +120,18 @@ async function viewRandomPage(browser, page) {
 
         console.log('\n🔗 Now watching streamer: ', baseUrl + watch);
 
-        await page.goto(baseUrl + watch, {
-          waitUntil: ["networkidle0", "domcontentloaded"]
-        }); //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
-        console.log('✅ Stream loaded!');
-        await clickWhenExist(page, cookiePolicyQuery);
-        await clickWhenExist(page, matureContentQuery); //Click on accept button
-
-        //Check if the stream video player is loaded
         await Promise.all([
-          page.waitForNavigation(),
-          page.reload({waitUntil: ["networkidle0", "domcontentloaded"]}),
+        page.waitForNavigation(),
+        await page.goto(baseUrl + watch, {
+          waitUntil: ["networkidle0", "domcontentloaded"]})
         ]);
+        console.log('✅ Stream loading!');
 
         console.log('🔧 Waiting for Stream Settings Query..');
         await page.waitForSelector(streamSettingsQuery);
         console.log('🔧 Done.');
 
+        await clickWhenExist(page, cookiePolicyQuery);
         //Force remove the banner
         let div_selector_to_remove= 'div[class="Layout-sc-nxg1ff-0 beayth consent-banner"]';
         await page.evaluate((sel) => {
@@ -144,6 +139,14 @@ async function viewRandomPage(browser, page) {
             for(var i=0; i< elements.length; i++){
                 elements[i].parentNode.removeChild(elements[i]);
             }}, div_selector_to_remove);
+
+        await clickWhenExist(page, matureContentQuery); //Click on accept button
+
+        //Check if the stream video player is loaded
+        // await Promise.all([
+        //   page.waitForNavigation(),
+        //   page.reload({waitUntil: ["networkidle0", "domcontentloaded"]}),
+        // ]);
 
         await takeScreenShot(page,watch);
 
