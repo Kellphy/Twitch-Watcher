@@ -357,6 +357,7 @@ async function checkLogin(page) {
   for (var i = 0; i < cookieSetByServer.length; i++) {
     if (cookieSetByServer[i].name == 'twilight-user') {
       console.log('✅ Login successful!');
+      return null;
     }
   }
   console.log('🛑 Login failed!');
