@@ -45,7 +45,7 @@ const browserClean = (Number(process.env.browserClean) || 1);
 const browserCleanUnit = (process.env.browserCleanUnit || 'hour'); //https://day.js.org/docs/en/manipulate/add
 
 var browserConfig = {
-  headless: showBrowser,
+  headless: !showBrowser,
   args: [
     '--disable-dev-shm-usage',
     '--disable-accelerated-2d-canvas',
@@ -125,6 +125,9 @@ async function viewRandomPage(browser, page) {
         }); //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
         console.log('✅ Stream loaded!');
         await clickWhenExist(page, cookiePolicyQuery);
+        page.$eval(cookiePolicyQuery, element =>
+        element.click()
+      );
         await clickWhenExist(page, matureContentQuery); //Click on accept button
 
         //Check if the stream video player is loaded
