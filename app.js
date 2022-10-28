@@ -125,9 +125,6 @@ async function viewRandomPage(browser, page) {
         }); //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
         console.log('✅ Stream loaded!');
         await clickWhenExist(page, cookiePolicyQuery);
-        page.$eval(cookiePolicyQuery, element =>
-        element.click()
-      );
         await clickWhenExist(page, matureContentQuery); //Click on accept button
 
         //Check if the stream video player is loaded
@@ -348,10 +345,18 @@ async function getAllStreamer(page) {
 
 async function checkLogin(page) {
   let cookieSetByServer = await page.cookies();
+
+  //Set accepted cookie
+  for (var i = 0; i < cookieSetByServer.length; i++) {
+    if (cookieSetByServer[i].name == 'unique_id_durable'
+    || cookieSetByServer[i].name == 'unique_id') {
+      cookieSetByServer[i].value = 'MP0G0llRT8fejiy1E2LzRaxgQ0zz68An';
+    }
+  }
+
   for (var i = 0; i < cookieSetByServer.length; i++) {
     if (cookieSetByServer[i].name == 'twilight-user') {
       console.log('✅ Login successful!');
-      return true;
     }
   }
   console.log('🛑 Login failed!');
