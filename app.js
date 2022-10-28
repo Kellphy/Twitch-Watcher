@@ -351,6 +351,8 @@ async function checkLogin(page) {
     if (cookieSetByServer[i].name == 'unique_id_durable'
     || cookieSetByServer[i].name == 'unique_id') {
       cookieSetByServer[i].value = 'MP0G0llRT8fejiy1E2LzRaxgQ0zz68An';
+      
+      console.log('✅ Set cookie!');
     }
   }
 
