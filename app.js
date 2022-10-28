@@ -228,6 +228,14 @@ async function claimDropsIfAny(page) {
     }) //https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagegobackoptions
   ]);
 
+        //Force remove the banner
+        let div_selector_to_remove= 'div[class="Layout-sc-nxg1ff-0 beayth consent-banner"]';
+        await page.evaluate((sel) => {
+            var elements = document.querySelectorAll(sel);
+            for(var i=0; i< elements.length; i++){
+                elements[i].parentNode.removeChild(elements[i]);
+            }}, div_selector_to_remove);
+
   var claimDrops = await queryOnWebsite(page, campaignInProgressDropClaimQuery);
   if (claimDrops.length > 0) {
     console.log(`🔎 ${claimDrops.length} drop(s) found!`);
