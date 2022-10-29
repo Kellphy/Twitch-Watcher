@@ -264,32 +264,6 @@ async function readLoginData() {
     "session": false,
     "storeId": "0",
     "id": 1
-  },
-  {
-  "name": "unique_id",
-  "value": "MP0G0llRT8fejiy1E2LzRaxgQ0zz68An",
-  "domain": ".twitch.tv",
-  "hostOnly": false,
-  "httpOnly": false,
-  "path": "/",
-  "sameSite": "no_restriction",
-  "secure": true,
-  "session": false,
-  "storeId": "0",
-  "id": 1
-  },
-  {
-  "name": "unique_id_durable",
-  "value": "MP0G0llRT8fejiy1E2LzRaxgQ0zz68An",
-  "domain": ".twitch.tv",
-  "hostOnly": false,
-  "httpOnly": true,
-  "path": "/",
-  "sameSite": "no_restriction",
-  "secure": true,
-  "session": false,
-  "storeId": "0",
-  "id": 1
   }];
   try {
     console.log('🔎 Checking config file...');
@@ -394,14 +368,6 @@ async function getAllStreamer(page) {
 
 async function checkLogin(page) {
   let cookieSetByServer = await page.cookies();
-
-  //Set accepted cookie
-  for (var i = 0; i < cookieSetByServer.length; i++) {
-    if (cookieSetByServer[i].name == 'unique_id_durable'
-    || cookieSetByServer[i].name == 'unique_id') {
-      console.log(cookieSetByServer[i].value);
-    }
-  }
 
   for (var i = 0; i < cookieSetByServer.length; i++) {
     if (cookieSetByServer[i].name == 'twilight-user') {
